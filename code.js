@@ -70,15 +70,19 @@ d3.json("submitTimes.json", function(error, data) {
         lastDate = date;
     });
 
-    var xdomain = d3.extent(peaks, function(d) {
+    x2.domain(d3.extent(peaks, function(d) {
         return d.date;
-    });
+    })).nice();
+    var xdomain = [], x2domain = x2.domain();
     var params = $.getQueryParameters();
     if (params && params.starttime) {
         xdomain[0] = d3.time.format('%Y-%m-%d').parse(params.starttime);
         peaks = peaks.filter(function(datum) {
-            return true || datum.date >= xdomain[0];
+            return datum.date >= xdomain[0];
         });
+    }
+    else {
+        xdomain[0] = x2domain[0];
     }
     if (params && params.endtime) {
         xdomain[1] = d3.time.format('%Y-%m-%d').parse(params.endtime);
@@ -86,10 +90,10 @@ d3.json("submitTimes.json", function(error, data) {
             return datum.date <= xdomain[1];
         });
     }
+    else {
+        xdomain[1] = x2domain[1];
+    }
     x.domain(xdomain).nice();
-    x2.domain(d3.extent(peaks, function(d) {
-        return d.date;
-    })).nice();
     y.domain(d3.extent(peaks, function(d) {
         return d.count;
     })).nice();
