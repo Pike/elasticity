@@ -5,8 +5,11 @@
     <meta charset="utf-8">
     <title>Elasticity in L10n Automation</title>
     <style>
-        body {
+        #graph {
             font: 10px sans-serif;
+            margin-left: 1em;
+            margin-right: 1em;
+            margin-bottom: 3em;
         }
         .axis path,
         .axis line {
@@ -21,12 +24,37 @@
             stroke: transparent;
             fill-opacity: 0.125;
         }
+        h1 {
+            text-align: center;
+        }
+        p {
+            margin-left: 3em;
+            width: 900px;
+        }
     </style>
 </head>
 
 <body>
     <h1>Elasticity in L10n Automation</h1>
     <p id="graph"></p>
+    <p>
+        The L10n automation requires quite a bit of elasticity. This graph
+        shows the number of automation requests per hour as well as how much
+        compute time that is. The time is estimated based on automation jobs
+        taking somewhat around 10 seconds.
+    </p>
+    <p>
+        The numbers show little need for compute power in general, with short
+        spikes of load for <code>en-US</code> landings triggering some 30mins
+        of compute time.
+    </p>
+    <p>
+        The notable spike on June 29th is merge day, which recomputes most,
+        and weighs in with some almost 3 hours of compute time.
+    </p>
+    <p>
+        <em>Use the x-axes to mark regions in time you want to drill in to.</em>
+    </p>
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
     <script src="code.js"></script>
